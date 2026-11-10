@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'AM_VERSION', '1.0.0' );
+define( 'AM_VERSION', '1.1.0' );
 
 /**
  * The site's sections. key => [ page title, page slug, default intro ].
@@ -174,7 +174,7 @@ add_filter( 'document_title_separator', function () { return '·'; } );
 add_filter(
 	'document_title_parts',
 	function ( $parts ) {
-		if ( is_front_page() ) {
+		if ( is_front_page() || 'door' === am_current_key() ) {
 			return array( 'title' => get_bloginfo( 'name' ) );
 		}
 		unset( $parts['tagline'] );
