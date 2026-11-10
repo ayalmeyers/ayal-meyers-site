@@ -16,14 +16,14 @@ define( 'AM_VERSION', '1.0.0' );
 function am_sections() {
 	return array(
 		'connections' => array( 'Connections', 'connections', '' ),
-		'writing'     => array( 'Writing', 'writing', "Essays and poems, research, and the writing I've done for other people. Reporting, speechwriting and policy writing taught me to write clearly. The essays are where I work out what I think." ),
-		'books'       => array( 'Books', 'books', "What I'm reading now, the books I come back to, and the rest of the shelf. I read to build a way of understanding the world, so most of these connect to more than one subject." ),
-		'music'       => array( 'Music', 'music', "What's on rotation, the albums that shaped me, and Melo, the app I'm building so people can talk about music and podcasts the way they talk about books and film." ),
-		'art'         => array( 'Art & Design', 'art-and-design', 'My own work, and the artists and designers I keep returning to.' ),
-		'modeling'    => array( 'Modeling', 'modeling', "I'm a sports and fitness model with Wilhelmina Sports in New York. Booking inquiries go through the agency." ),
-		'subjects'    => array( 'Subjects', 'subjects', 'Four subjects run through everything else on this site. Each one below lists how it connects and every piece tied to it, from every section.' ),
-		'world'       => array( 'Exploring our world', 'exploring-our-world', "I spend as much time outside as I can. Nature is the mountains and the ocean. Adventure is how I get into them: surfing, skiing, jiu-jitsu, and the Tour du Mont Blanc, which I walked alone." ),
-		'people'      => array( 'People', 'people', "The people whose work shaped how I think. Each one ties into the subjects and the parts of my life where their ideas show up." ),
+		'writing'     => array( 'Writing', 'writing', '' ),
+		'books'       => array( 'Books', 'books', '' ),
+		'music'       => array( 'Music', 'music', '' ),
+		'art'         => array( 'Art & Design', 'art-and-design', '' ),
+		'modeling'    => array( 'Modeling', 'modeling', '' ),
+		'subjects'    => array( 'Subjects', 'subjects', '' ),
+		'world'       => array( 'Exploring our world', 'exploring-our-world', '' ),
+		'people'      => array( 'People', 'people', '' ),
 	);
 }
 
@@ -131,7 +131,8 @@ add_action(
 		$key = am_current_key();
 		if ( 'home' === $key ) {
 			wp_enqueue_script( 'am-graph', $uri . 'graph.js', array( 'am-site' ), $ver, true );
-			wp_enqueue_script( 'am-hero', $uri . 'hero.js', array( 'am-graph' ), $ver, true );
+			wp_enqueue_script( 'am-world', $uri . 'world.js', array(), $ver, true );
+			wp_enqueue_script( 'am-hero', $uri . 'hero.js', array( 'am-graph', 'am-world' ), $ver, true );
 		} elseif ( 'connections' === $key ) {
 			wp_enqueue_script( 'am-graph', $uri . 'graph.js', array( 'am-site' ), $ver, true );
 			wp_enqueue_script( 'am-connections', $uri . 'connections.js', array( 'am-graph' ), $ver, true );

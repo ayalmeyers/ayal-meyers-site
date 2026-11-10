@@ -10,7 +10,6 @@ $u = 'am_url';
 		<canvas aria-hidden="true"></canvas>
 		<header class="top" data-bar-plain></header>
 		<div class="step" data-range="0.12,0.37"><p>I studied cognitive neuroscience at Berkeley. <span class="dim">Now I write, model, and work in AI and strategic communication in New York.</span></p></div>
-		<div class="step" data-range="0.42,0.71"><p>None of it sits apart. <span class="dim">Neuroscience runs into modeling, music runs into people, politics runs into writing.</span> <a href="<?php echo esc_url( $u( 'connections' ) ); ?>">See how it connects</a></p></div>
 		<div class="step" data-range="0.76,1"><p>The rest of the time I'm outside. <span class="dim">Surfing, skiing, and walking mountains.</span> <a href="<?php echo esc_url( $u( 'world' ) ); ?>">Exploring our world</a></p></div>
 		<div class="scroll-hint">Scroll</div>
 	</div>
@@ -32,8 +31,6 @@ $u = 'am_url';
 			<p><a href="<?php echo esc_url( $u( 'connections' ) ); ?>">Connections</a> · <a href="<?php echo esc_url( $u( 'world' ) ); ?>">Exploring our world</a> · <a href="<?php echo esc_url( $u( 'people' ) ); ?>">People</a></p>
 		</aside>
 	</div>
-	<h2>Selected work</h2>
-	<div class="grid" data-featured></div>
 </main>
 <?php
 get_footer();

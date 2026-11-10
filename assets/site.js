@@ -43,8 +43,7 @@
 
   // "Connects to …" line for an item
   function tags(links, skip) {
-    const ls = links.filter(l => l !== skip && NODE[l]);
-    if (!ls.length) return "";
+    return "";
     return `<span class="tags">Connects to ${ls.map(l => `<a href="${NODE[l].href}">${esc(NODE[l].label.toLowerCase())}</a>`).join(", ")}</span>`;
   }
   function itemLI(it, skip) {
@@ -131,6 +130,18 @@
     }
     size(); addEventListener("resize", size); requestAnimationFrame(draw);
   }
+
+  // Click a gallery photo to view it large; click again or press Escape to close
+  document.querySelectorAll(".gallery a").forEach(a => a.addEventListener("click", e => {
+    e.preventDefault();
+    const box = document.createElement("div");
+    box.className = "lightbox"; box.setAttribute("role", "dialog"); box.setAttribute("aria-label", "Photo");
+    box.innerHTML = `<img src="${a.getAttribute("href")}" alt="${esc(a.querySelector("img").alt)}">`;
+    const close = () => { box.remove(); document.removeEventListener("keydown", onKey); a.focus(); };
+    const onKey = ev => { if (ev.key === "Escape") close(); };
+    box.addEventListener("click", close); document.addEventListener("keydown", onKey);
+    document.body.appendChild(box);
+  }));
 
   window.SITE_UTIL = { NODE, esc, reduce, starField, U };
 })();

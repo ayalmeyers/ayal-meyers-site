@@ -46,57 +46,6 @@ window.SITE = {
     { a: "modeling",      b: "adventure",     text: "Training for the camera and training for the mountains are the same discipline pointed at different things." }
   ],
 
-  items: [
-    // Writing
-    { page: "writing", section: "Essays",   title: "Personal essays", note: "Essays on mind, belief and how I'm learning to live.", links: ["philosophy", "consciousness"] },
-    { page: "writing", section: "Essays",   title: "Poems", note: "Collected as they're finished.", links: ["consciousness"] },
-    { page: "writing", section: "Research", title: "Spontaneous speech and AI", note: "Research on how relying on AI changes our ability to speak without a script.", links: ["neuroscience", "politics"], featured: true },
-    { page: "writing", section: "Work",     title: "Reporting", by: "The Daily Californian", note: "Journalism at Berkeley.", links: ["politics"] },
-    { page: "writing", section: "Work",     title: "Speechwriting", by: "Strategic communication", note: "Writing in other people's voices.", links: ["politics"] },
-    { page: "writing", section: "Work",     title: "Policy writing", by: "Mitvim", note: "Ghostwriting policy for international parliamentarians.", links: ["politics"] },
-
-    // Books
-    { page: "books", section: "Reading now", title: "Surfing Uncertainty", by: "Andy Clark", note: "The brain as a prediction machine.", links: ["neuroscience", "consciousness", "philosophy"], featured: true },
-    { page: "books", section: "Favorites",   title: "Descartes' Error", by: "Antonio Damasio", note: "Emotion as part of reason.", links: ["neuroscience", "consciousness"] },
-    { page: "books", section: "Favorites",   title: "Mortal Questions", by: "Thomas Nagel", note: "Short essays on death, luck and the mind.", links: ["consciousness", "philosophy"] },
-    { page: "books", section: "Shelf",       title: "Thinking, Fast and Slow", by: "Daniel Kahneman", note: "Where behavioral economics started for me.", links: ["neuroscience", "politics"] },
-    { page: "books", section: "Shelf",       title: "The Human Condition", by: "Hannah Arendt", note: "Labor, work and action.", links: ["politics", "philosophy"] },
-    { page: "books", section: "Shelf",       title: "The Conscious Mind", by: "David Chalmers", note: "The hard problem, stated as sharply as anyone has.", links: ["consciousness", "philosophy"] },
-    { page: "books", section: "Shelf",       title: "Nudge", by: "Richard Thaler and Cass Sunstein", note: "Choice architecture.", links: ["politics", "neuroscience"] },
-
-    // Music
-    { page: "music", section: "Building",              title: "Melo", by: "In development", note: "A social app for music and podcasts. Reviews, discussion, shared libraries, and pages for albums, artists and genres.", links: ["people", "music"], featured: true },
-    { page: "music", section: "On rotation",           title: "Music for Airports", by: "Brian Eno", note: "", links: ["consciousness"] },
-    { page: "music", section: "On rotation",           title: "22, A Million", by: "Bon Iver", note: "", links: ["philosophy"] },
-    { page: "music", section: "Albums that shaped me", title: "Blonde", by: "Frank Ocean", note: "", links: ["consciousness"] },
-    { page: "music", section: "Albums that shaped me", title: "To Pimp a Butterfly", by: "Kendrick Lamar", note: "", links: ["politics", "philosophy"] },
-    { page: "music", section: "Albums that shaped me", title: "Kid A", by: "Radiohead", note: "", links: ["consciousness", "politics"] },
-
-    // Art & Design
-    { page: "art", section: "My work",    title: "This site", note: "Designed around one idea: everything I do is connected.", links: ["art", "philosophy"] },
-    { page: "art", section: "References", title: "Skyspaces", by: "James Turrell", note: "Light as material.", links: ["consciousness", "neuroscience"] },
-    { page: "art", section: "References", title: "The grid paintings", by: "Agnes Martin", note: "Quiet, repeated lines.", links: ["consciousness"] },
-    { page: "art", section: "References", title: "Ten principles of good design", by: "Dieter Rams", note: "", links: ["philosophy"] },
-    { page: "art", section: "References", title: "Envisioning Information", by: "Edward Tufte", note: "Information design as honest argument.", links: ["politics"] },
-
-    // Modeling
-    { page: "modeling", section: "Representation", title: "Wilhelmina Sports", by: "New York", note: "Sports and fitness modeling. Booking through the agency.", links: ["adventure", "neuroscience"] },
-
-    // Exploring our world
-    { page: "world", section: "Nature",    title: "Mountains", note: "The Alps, mostly on foot.", links: ["nature", "consciousness"] },
-    { page: "world", section: "Nature",    title: "Ocean", note: "Where I surf.", links: ["nature"] },
-    { page: "world", section: "Adventure", title: "Tour du Mont Blanc", by: "Solo", note: "The full loop through France, Italy and Switzerland.", links: ["adventure", "nature", "philosophy"], featured: true },
-    { page: "world", section: "Adventure", title: "Surfing", note: "", links: ["adventure", "nature"] },
-    { page: "world", section: "Adventure", title: "Skiing", note: "", links: ["adventure", "nature"] },
-    { page: "world", section: "Adventure", title: "Brazilian jiu-jitsu", note: "", links: ["adventure", "neuroscience"] },
-    { page: "world", section: "Adventure", title: "Basketball", note: "", links: ["adventure"] },
-
-    // People
-    { page: "people", section: "Thinkers", title: "Thomas Nagel", note: "Showed me what the question of consciousness actually is.", links: ["consciousness", "philosophy"] },
-    { page: "people", section: "Thinkers", title: "Antonio Damasio", note: "Put the body back into the mind.", links: ["neuroscience"] },
-    { page: "people", section: "Thinkers", title: "Andy Clark", note: "The predictive brain and the extended mind.", links: ["neuroscience", "philosophy"] },
-    { page: "people", section: "Thinkers", title: "Daniel Kahneman", note: "How people actually decide.", links: ["politics", "neuroscience"] },
-    { page: "people", section: "Thinkers", title: "Hannah Arendt", note: "What it means to act in public.", links: ["politics", "philosophy"] },
-    { page: "people", section: "Thinkers", title: "Brian Eno", note: "Music as a way of shaping attention.", links: ["music", "consciousness"] }
-  ]
+  // Entries for the section pages: { page: "books", section: "Shelf", title: "...", by: "...", note: "...", links: ["philosophy"] }
+  items: []
 };
