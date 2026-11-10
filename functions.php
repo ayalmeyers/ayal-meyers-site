@@ -24,6 +24,7 @@ function am_sections() {
 		'subjects'    => array( 'Subjects', 'subjects', '' ),
 		'world'       => array( 'Exploring our world', 'exploring-our-world', '' ),
 		'people'      => array( 'People', 'people', '' ),
+		'door'        => array( 'Door', 'door', '' ),
 	);
 }
 
@@ -132,7 +133,13 @@ add_action(
 		if ( 'home' === $key ) {
 			wp_enqueue_script( 'am-graph', $uri . 'graph.js', array( 'am-site' ), $ver, true );
 			wp_enqueue_script( 'am-world', $uri . 'world.js', array(), $ver, true );
-			wp_enqueue_script( 'am-hero', $uri . 'hero.js', array( 'am-graph', 'am-world' ), $ver, true );
+			wp_enqueue_script( 'am-forms', $uri . 'forms.js', array(), $ver, true );
+			wp_enqueue_script( 'am-hero', $uri . 'hero.js', array( 'am-graph', 'am-world', 'am-forms' ), $ver, true );
+		} elseif ( 'door' === $key ) {
+			wp_dequeue_script( 'am-site' );
+			wp_enqueue_script( 'am-supabase', 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.50.0/dist/umd/supabase.js', array(), null, true );
+			wp_enqueue_script( 'am-door-config', $uri . 'door-config.js', array(), $ver, true );
+			wp_enqueue_script( 'am-door', $uri . 'door.js', array( 'am-supabase', 'am-door-config' ), $ver, true );
 		} elseif ( 'connections' === $key ) {
 			wp_enqueue_script( 'am-graph', $uri . 'graph.js', array( 'am-site' ), $ver, true );
 			wp_enqueue_script( 'am-connections', $uri . 'connections.js', array( 'am-graph' ), $ver, true );
@@ -152,6 +159,9 @@ add_action(
 	function () {
 		echo '<link rel="preconnect" href="https://fonts.googleapis.com">' . "\n";
 		echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>' . "\n";
+		if ( 'door' === am_current_key() ) {
+			echo '<meta name="robots" content="noindex, nofollow">' . "\n";
+		}
 		if ( is_front_page() ) {
 			echo '<meta name="description" content="' . esc_attr( 'Ayal Meyers. Neuroscience, consciousness, politics and philosophy, and how they connect to writing, books, music, art, modeling, people and the outdoors.' ) . '">' . "\n";
 		}

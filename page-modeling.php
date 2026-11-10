@@ -8,6 +8,10 @@ $d = get_template_directory_uri() . '/assets';
 <header data-bar></header>
 <main class="notebook wide">
 	<h1><?php echo esc_html( am_sections()['modeling'][0] ); ?></h1>
+	<dl class="agency">
+		<dt>Agency</dt><dd>Wilhelmina</dd>
+		<dt>Agent</dt><dd><a href="mailto:Mike.Schepers@wilhelmina.com">Mike.Schepers@wilhelmina.com</a></dd>
+	</dl>
 	<div class="gallery">
 		<a href="<?php echo esc_url( $d ); ?>/photos/street.jpg"><img src="<?php echo esc_url( $d ); ?>/photos/street.jpg" width="1499" height="1000" alt="Ayal Meyers" loading="eager"></a>
 		<a href="<?php echo esc_url( $d ); ?>/photos/denim.jpg"><img src="<?php echo esc_url( $d ); ?>/photos/denim.jpg" width="1199" height="1500" alt="Ayal Meyers" loading="eager"></a>

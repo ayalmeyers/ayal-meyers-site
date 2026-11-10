@@ -5,7 +5,7 @@
   const cv = hero.querySelector("canvas"), ctx = cv.getContext("2d");
   const steps = [...hero.querySelectorAll(".step")], hint = hero.querySelector(".scroll-hint");
   const { reduce } = window.SITE_UTIL;
-  const KEYS = [[0, "stars"], [0.05, "stars"], [0.19, "name"], [0.31, "name"], [0.47, "network"], [0.65, "network"], [0.81, "globe"], [1, "globe"]];
+  const KEYS = [[0, "idle"], [0.05, "idle"], [0.19, "name"], [0.31, "name"], [0.47, "network"], [0.65, "network"], [0.81, "globe"], [1, "globe"]];
 
   let W = 0, H = 0, N = 0, P = [], T = {}, pos = {}, sphere = [], labels = [], netW = 0, globeW = 0;
   const mouse = { x: -1e4, y: -1e4 };
@@ -35,6 +35,9 @@
     if (n !== N) { N = n; P = Array.from({ length: N }, () => ({ x: Math.random() * W, y: Math.random() * H, ph: Math.random() * 6.28, a: 0.5 })); }
     const rnd = window.GRAPH.rng(3);
     T.stars = P.map(() => ({ x: rnd() * W, y: rnd() * H, a: 0.12 + rnd() * 0.5 }));
+    const small = W < 700;
+    formBox = { cx: W / 2, cy: H * (small ? 0.46 : 0.47), s: small ? Math.min(W * 0.42, H * 0.26) : Math.min(W * 0.34, H * 0.34) };
+    formSets = []; formStart = null;
     T.name = sampleText(window.SITE.name);
     pos = window.GRAPH.place(W, H, W < 700 ? { cy: 0.44, sy: 0.26, sx: 0.38 } : { cy: 0.44, sy: 0.36 });
     T.network = window.GRAPH.points(N, pos, W < 700 ? 7 : 10).map(p => ({ x: p.x, y: p.y, a: p.node ? 0.8 : 0.5 }));
@@ -101,13 +104,38 @@
   }
   const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 
+  // Before the visitor scrolls: stars, then the forms in turn. Each form holds, then morphs into the next.
+  const HOLD = 2.4, MORPH = 1.6, STEP = HOLD + MORPH, ORDER = window.FORMS ? window.FORMS.ORDER : [];
+  let formSets = [], formBox = null, formStart = null;
+  function buildNextForm() {
+    if (!window.FORMS || formSets.length >= ORDER.length || !N) return;
+    formSets.push(window.FORMS.sample(ORDER[formSets.length], W, H, N, formBox));
+  }
+  const easeIO = x => x < .5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2;
+  function idle(t) {
+    if (reduce || formSets.length < 2) return T.stars;
+    if (formStart === null) formStart = t;
+    const u = t - formStart - 0.8;                       // a moment of stars first
+    if (u < 0) return T.stars;
+    const total = ORDER.length, i = Math.floor(u / STEP), within = u - i * STEP;
+    const from = i === 0 && within < MORPH ? T.stars : formSets[(i - (within < MORPH ? 1 : 0) + total) % total];
+    const to = formSets[i % total];
+    if (!to || formSets.length < Math.min(total, i + 2)) return formSets[Math.min(i, formSets.length - 1)] || T.stars;
+    if (within >= MORPH) return to;
+    const e = easeIO(within / MORPH);
+    return to.map((b, j) => { const a = from[j]; return { x: a.x + (b.x - a.x) * e, y: a.y + (b.y - a.y) * e, a: a.a + (b.a - a.a) * e }; });
+  }
+
   function frame(now) {
     const t = now / 1000, p = progress();
     let k = 0; while (k < KEYS.length - 2 && p > KEYS[k + 1][0]) k++;
     const [p0, A] = KEYS[k], [p1, B] = KEYS[k + 1];
     const e = p1 > p0 ? ease(Math.min(1, Math.max(0, (p - p0) / (p1 - p0)))) : 0;
     const G = (A === "globe" || B === "globe") ? globe(t) : null;
-    const tA = A === "globe" ? G : T[A], tB = B === "globe" ? G : T[B];
+    if (formSets.length < ORDER.length) buildNextForm();
+    const I = (A === "idle" || B === "idle") ? idle(t) : null;
+    const pick = name => name === "globe" ? G : name === "idle" ? I : T[name];
+    const tA = pick(A), tB = pick(B);
     netW = (A === "network" ? 1 - e : 0) + (B === "network" ? e : 0);
     globeW = (A === "globe" ? 1 - e : 0) + (B === "globe" ? e : 0);
 
