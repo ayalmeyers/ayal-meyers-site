@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'AM_VERSION', '1.1.0' );
+define( 'AM_VERSION', '1.1.1' );
 
 /**
  * The site's sections. key => [ page title, page slug, default intro ].
