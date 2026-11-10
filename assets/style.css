@@ -172,3 +172,22 @@ body.night { background: var(--night); color: var(--night-ink); font-family: var
 .admin-bar .hero .stage, .admin-bar .conn .map { top: var(--wp-admin--admin-bar--height, 32px); height: calc(100vh - var(--wp-admin--admin-bar--height, 32px)); }
 .notebook article > * + * { margin-top: 0; }
 .notebook img { height: auto; }
+
+/* Keep the footer at the bottom of the window on short pages */
+body { min-height: 100vh; min-height: 100svh; display: flex; flex-direction: column; }
+body > main.notebook { flex: 1 0 auto; width: 100%; }
+body > .conn { width: 100%; }
+
+/* Modeling gallery: natural proportions, two columns (one on phones), click to enlarge */
+.notebook.wide { max-width: 1200px; }
+.gallery { columns: 2; column-gap: 12px; }
+.gallery a { display: block; break-inside: avoid; margin-bottom: 12px; cursor: zoom-in; }
+.gallery img { width: 100%; height: auto; display: block; }
+.lightbox { position: fixed; inset: 0; z-index: 50; background: rgba(20, 19, 22, .94); display: flex; align-items: center; justify-content: center; padding: 24px; cursor: zoom-out; }
+.lightbox img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; }
+
+/* Videos */
+.notebook .date { color: var(--ink-soft); font-size: 17px; margin: -4px 0 16px; }
+.videos { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+.videos video { display: block; max-width: 100%; max-height: 80vh; width: auto; height: auto; background: var(--night); }
+@media (max-width: 860px) { .gallery { columns: 1; } }

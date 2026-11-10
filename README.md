@@ -22,19 +22,12 @@ Plain HTML, CSS and JavaScript. No build step. Every push to `main` goes live wi
 
 ## Editing
 
-- **Lists, connections and the map**: everything lives in `assets/data.js`.
-  - `nodes`: the parts of life and thought on the map.
-  - `edges`: each connection and the sentence that explains it. These show on the Connections page, on the home map, and under "How it connects" on every page.
-  - `items`: every entry on the section pages. `links` sets what each one connects to. `featured: true` puts it in Selected work on the home page.
-- **Page intros and the home page text**: the `<p>` paragraphs in each page's `index.html`.
+- **Section pages**: each page's `index.html`. Writing, Books, Music, Art & Design, People and Subjects hold only their headings, ready to fill.
+- **Modeling**: photos live in `assets/photos/`. Add one by copying an `<a><img></a>` line inside `<div class="gallery">` in `modeling/index.html`. Click any photo to view it large.
+- **Exploring our world**: videos live in `assets/video/` (MP4, H.264). Each `<video>` in `exploring-our-world/index.html` points to one, with a poster image of the same name.
+- **The map and connections**: `assets/data.js`. `nodes` are the parts of life on the map; `edges` are the connections and the sentence for each, shown on the Connections page.
+- **Home globe**: `assets/world.js` holds the world map data (Natural Earth, public domain).
 - **Styles**: `assets/style.css`.
-
-## Photos
-
-Put images in `assets/photos/`.
-
-- Portrait: in `index.html`, replace the canvas inside `<aside class="side">` with `<img src="/assets/photos/portrait.jpg" alt="Ayal Meyers">`.
-- Modeling portfolio: in `modeling/index.html`, replace each canvas in `<div class="frames">` with an `<img>`.
 
 ## Other files
 

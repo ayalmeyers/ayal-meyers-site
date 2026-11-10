@@ -1,5 +1,5 @@
 // Home page: one field of particles that re-forms as you scroll.
-// stars -> name -> map of connections -> globe.
+// stars -> name -> map of connections -> globe of the world.
 (async function () {
   const hero = document.querySelector(".hero"); if (!hero) return;
   const cv = hero.querySelector("canvas"), ctx = cv.getContext("2d");
@@ -38,12 +38,61 @@
     T.name = sampleText(window.SITE.name);
     pos = window.GRAPH.place(W, H, W < 700 ? { cy: 0.44, sy: 0.26, sx: 0.38 } : { cy: 0.44, sy: 0.36 });
     T.network = window.GRAPH.points(N, pos, W < 700 ? 7 : 10).map(p => ({ x: p.x, y: p.y, a: p.node ? 0.8 : 0.5 }));
-    sphere = Array.from({ length: N }, (_, i) => { const y = 1 - (i + 0.5) / N * 2, rr = Math.sqrt(1 - y * y), t = i * 2.399963; return [Math.cos(t) * rr, y, Math.sin(t) * rr]; });
+    sphere = Array.from({ length: N }, (_, i) => {
+      const y = 1 - (i + 0.5) / N * 2, lat = Math.asin(y), lon = ((i * 2.399963) % (2 * Math.PI)) - Math.PI;
+      return { lat, lon, land: isLand(lat, lon) };
+    });
   }
 
+  // World map: land bitmap for the particles, coastline and border points for the outline layer.
+  const WD = window.WORLD;
+  const LAND = WD ? Uint8Array.from(atob(WD.LAND), c => c.charCodeAt(0)) : null;
+  function isLand(lat, lon) {
+    if (!LAND) return false;
+    const row = Math.min(WD.H - 1, Math.max(0, Math.floor(90 - lat * 180 / Math.PI)));
+    const col = Math.min(WD.W - 1, Math.max(0, Math.floor(lon * 180 / Math.PI + 180)));
+    const k = row * WD.W + col;
+    return (LAND[k >> 3] >> (k & 7)) & 1;
+  }
+  const EDGES = (() => {
+    if (!WD) return new Float32Array(0);
+    const b = Uint8Array.from(atob(WD.EDGES), c => c.charCodeAt(0)), v = new DataView(b.buffer), n = b.length / 4, out = new Float32Array(n * 2);
+    for (let i = 0; i < n; i++) { out[i * 2] = v.getInt16(i * 4, true) / 100 * Math.PI / 180; out[i * 2 + 1] = v.getInt16(i * 4 + 2, true) / 100 * Math.PI / 180; }
+    return out;
+  })();
+
+  const TILT = 0.38;
+  function globeGeom() {
+    const small = W < 700;
+    return { R: Math.min(W, H) * (small ? 0.4 : 0.34), cx: W / 2, cy: H * (small ? 0.4 : 0.44) };
+  }
+  // lat/lon to screen; z > 0 faces the viewer
+  function project(lat, lon, rot, g) {
+    const cl = Math.cos(lat), x = cl * Math.sin(lon + rot), z0 = cl * Math.cos(lon + rot), y0 = Math.sin(lat);
+    const y = y0 * Math.cos(TILT) - z0 * Math.sin(TILT), z = z0 * Math.cos(TILT) + y0 * Math.sin(TILT);
+    return [g.cx + x * g.R, g.cy - y * g.R, z];
+  }
+  const spin = t => -1.4 + t * 0.1;
+
   function globe(t) {
-    const R = Math.min(W, H) * (W < 700 ? 0.4 : 0.34), cx = W / 2, cy = H * (W < 700 ? 0.4 : 0.44), rot = t * 0.12, c = Math.cos(rot), s = Math.sin(rot), tilt = 0.35, ct = Math.cos(tilt), st = Math.sin(tilt);
-    return sphere.map(([x, y, z]) => { const X = x * c - z * s, Z = x * s + z * c, Y = y * ct - Z * st, Z2 = y * st + Z * ct; return { x: cx + X * R, y: cy + Y * R, a: 0.12 + 0.75 * (Z2 * 0.5 + 0.5) }; });
+    const g = globeGeom(), rot = spin(t);
+    return sphere.map(p => {
+      const [x, y, z] = project(p.lat, p.lon, rot, g);
+      const face = z * 0.5 + 0.5;
+      return { x, y, a: p.land ? 0.1 + 0.85 * face * face : 0.04 + 0.16 * face };
+    });
+  }
+
+  function drawOutlines(t, w) {
+    const g = globeGeom(), rot = spin(t);
+    ctx.fillStyle = "#f0f2f0";
+    for (let i = 0; i < EDGES.length; i += 2) {
+      const [x, y, z] = project(EDGES[i + 1], EDGES[i], rot, g);
+      if (z < 0.02) continue;
+      ctx.globalAlpha = w * 0.75 * z;
+      ctx.fillRect(x, y, 1, 1);
+    }
+    ctx.globalAlpha = 1;
   }
 
   function progress() {
@@ -51,17 +100,6 @@
     return Math.min(1, Math.max(0, -r.top / total));
   }
   const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-
-  function arcText(text, cx, cy, R, center) {
-    ctx.font = `400 ${W < 700 ? 15 : 19}px "Inter Tight", system-ui, sans-serif`; ctx.textAlign = "center"; ctx.textBaseline = "alphabetic";
-    const widths = [...text].map(ch => ctx.measureText(ch).width), total = widths.reduce((a, b) => a + b, 0);
-    let ang = center - total / R / 2;
-    [...text].forEach((ch, i) => {
-      const a = ang + widths[i] / R / 2;
-      ctx.save(); ctx.translate(cx + Math.cos(a) * R, cy + Math.sin(a) * R); ctx.rotate(a + Math.PI / 2); ctx.fillText(ch, 0, 0); ctx.restore();
-      ang += widths[i] / R;
-    });
-  }
 
   function frame(now) {
     const t = now / 1000, p = progress();
@@ -93,13 +131,7 @@
       ctx.fillRect(q.x, q.y, 1.25, 1.25);
     }
     labels = netW > 0.25 ? window.GRAPH.drawLabels(ctx, pos, () => Math.max(0, (netW - 0.25) / 0.75), W < 700 ? 12 : 14) : [];
-    if (globeW > 0.3) {
-      ctx.globalAlpha = (globeW - 0.3) / 0.7; ctx.fillStyle = "#f0f2f0";
-      const R = Math.min(W, H) * (W < 700 ? 0.4 : 0.34) + 18, cy = H * (W < 700 ? 0.4 : 0.44);
-      arcText("Nature", W / 2, cy, R, -Math.PI * 0.68);
-      arcText("Adventure", W / 2, cy, R, Math.PI * 0.32);
-      ctx.globalAlpha = 1;
-    }
+    if (globeW > 0.02) drawOutlines(t, globeW);
     steps.forEach(s => { const [a, b] = s.dataset.range.split(",").map(Number); s.classList.toggle("on", p >= a && p <= b); });
     if (hint) hint.style.opacity = p < 0.03 ? 1 : 0;
     requestAnimationFrame(frame);
