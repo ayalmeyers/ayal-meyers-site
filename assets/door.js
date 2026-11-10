@@ -4,7 +4,7 @@
 (function () {
   const CFG = window.DOOR_CONFIG || {};
   const sb = window.supabase && CFG.url ? window.supabase.createClient(CFG.url, CFG.key) : null;
-  const ADMIN_EMAIL = "adm@ayalmeyers.com";
+  const ADMIN_EMAIL = "ayal@meyerslink.com";
   const WORD = "1d4cd10e3aefad06c97bd8f37b073e99e006aa12cfd9a53df2b195a0c9bb7a24"; // sha-256 of the access word
 
   const $ = s => document.querySelector(s);

@@ -42,7 +42,7 @@ One text box. Return clears it.
 
 Backend: Supabase project `ayalmeyers-site` (Chuk's Org). The schema and every access rule are in `supabase/schema.sql`.
 `assets/door-config.js` holds the project address and its public key; visitors can only call the member functions, never read the tables.
-The admin is the Supabase Auth user `adm@ayalmeyers.com`, created in the Supabase dashboard (Authentication › Users › Add user, with Auto Confirm).
+The admin is the Supabase Auth user `ayal@meyerslink.com`, created in the Supabase dashboard (Authentication › Users › Add user, with Auto Confirm).
 
 ## Other files
 

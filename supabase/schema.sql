@@ -1,6 +1,6 @@
 -- ayalmeyers.com private area. Run in the Supabase SQL editor.
 --
--- Admin: the Supabase Auth user adm@ayalmeyers.com (signs in on the site as "ADM").
+-- Admin: the Supabase Auth user ayal@meyerslink.com (signs in on the site as "ADM").
 --        Works with the tables directly; row level security lets only that user in.
 -- Members: not Supabase Auth users. They request access with a name, email, note and password
 --        (stored as a bcrypt hash). Once approved, they sign in through the functions below,
@@ -58,7 +58,7 @@ create index sessions_member_idx on public.member_sessions (member_id);
 
 -- ---------- admin access (Supabase Auth) ----------
 create or replace function public.is_admin() returns boolean
-language sql stable as $$ select coalesce(auth.jwt() ->> 'email', '') = 'adm@ayalmeyers.com' $$;
+language sql stable as $$ select coalesce(auth.jwt() ->> 'email', '') = 'ayal@meyerslink.com' $$;
 
 alter table public.members enable row level security;
 alter table public.member_sessions enable row level security;
