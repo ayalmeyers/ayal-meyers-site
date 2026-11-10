@@ -1,15 +1,27 @@
-<?php
-/**
- * Subjects page.
- */
-get_header();
-?>
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<title>Subjects · Ayal Meyers</title>
+<meta property="og:title" content="Subjects · Ayal Meyers">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ayalmeyers.com/subjects/">
+<meta property="og:image" content="https://ayalmeyers.com/assets/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://ayalmeyers.com/subjects/">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&display=swap">
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body class="page">
 <header data-bar></header>
 <main class="notebook">
-	<h1><?php echo esc_html( am_sections()['subjects'][0] ); ?></h1>
+	<h1>Subjects</h1>
 	<p class="jump"><a href="#neuroscience">Neuroscience</a> · <a href="#consciousness">Consciousness</a> · <a href="#politics">Politics</a> · <a href="#philosophy">Philosophy</a></p>
-	<?php am_intro( 'subjects' ); ?>
-
+	<p>Four subjects run through everything else on this site. Each one below lists how it connects and every piece tied to it, from every section.</p>
 	<h2 id="neuroscience">Neuroscience</h2>
 	<p>How brains build minds. I studied cognitive neuroscience at Berkeley, and the questions I care most about are perception, prediction, emotion, and the body&#039;s part in all of it.</p>
 	<h3>How it connects</h3>
@@ -35,5 +47,9 @@ get_header();
 	<div data-related="philosophy"></div>
 
 </main>
-<?php
-get_footer();
+<footer data-foot></footer>
+<script src="/assets/data.js"></script>
+<script>window.SITE_URLS = {"home":"/","connections":"/connections/","writing":"/writing/","books":"/books/","music":"/music/","art":"/art-and-design/","modeling":"/modeling/","subjects":"/subjects/","world":"/exploring-our-world/","people":"/people/"}; window.SITE_HERE = "subjects";</script>
+<script src="/assets/site.js"></script>
+</body>
+</html>
