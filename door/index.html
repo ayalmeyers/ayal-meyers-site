@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta name="robots" content="noindex, nofollow">
+<title>Door · Ayal Meyers</title>
+<meta property="og:title" content="Door · Ayal Meyers">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ayalmeyers.com/door/">
+<meta property="og:image" content="https://ayalmeyers.com/assets/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://ayalmeyers.com/door/">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&display=swap">
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body class="page door">
+<main id="door">
+	<input id="box" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Text">
+	<input id="pw" type="password" autocomplete="current-password" aria-label="Password" hidden>
+	<p id="ask" hidden>please type your name, email, and a brief note.</p>
+	<form id="request" hidden>
+		<input id="r-name" type="text" autocomplete="name" aria-label="Name" placeholder="name" maxlength="120">
+		<input id="r-email" type="email" autocomplete="email" aria-label="Email" placeholder="email" maxlength="320">
+		<textarea id="r-note" aria-label="Note" placeholder="note" maxlength="4000" rows="3"></textarea>
+		<input id="r-pass" type="password" autocomplete="new-password" aria-label="Password" placeholder="password" minlength="8">
+		<button type="submit">Send</button>
+	</form>
+	<p id="msg" aria-live="polite"></p>
+</main>
+
+<div id="inside" hidden>
+	<div class="in-bar"><a href="/">Ayal Meyers</a><span><span id="who"></span> · <button class="link" id="signout">Sign out</button></span></div>
+	<div class="in-main">
+		<section id="admin" hidden>
+			<h2>Requests</h2>
+			<ul id="requests" class="in-list"></ul>
+			<h2>Members</h2>
+			<ul id="members" class="in-list"></ul>
+			<div id="a-thread-wrap" hidden>
+				<h2 id="a-thread-name"></h2>
+				<ul id="a-thread" class="thread"></ul>
+				<form id="a-thread-form" class="row-form"><input name="m" aria-label="Message" placeholder="Message" maxlength="8000"><button>Send</button></form>
+			</div>
+			<h2>Post</h2>
+			<form id="new-post"><textarea name="p" aria-label="New post" rows="4" maxlength="20000"></textarea><button>Post</button></form>
+		</section>
+		<section>
+			<div id="posts"></div>
+		</section>
+		<section id="thread-mine" hidden>
+			<h2>Ayal</h2>
+			<ul id="thread" class="thread"></ul>
+			<form id="thread-form" class="row-form"><input name="m" aria-label="Message" placeholder="Message" maxlength="8000"><button>Send</button></form>
+		</section>
+	</div>
+</div>
+<script src="/assets/data.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.50.0/dist/umd/supabase.js"></script>
+<script src="/assets/door-config.js"></script>
+<script src="/assets/door.js"></script>
+</body>
+</html>
