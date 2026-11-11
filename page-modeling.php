@@ -9,7 +9,7 @@ $d = get_template_directory_uri() . '/assets';
 <main class="notebook wide">
 	<h1><?php echo esc_html( am_sections()['modeling'][0] ); ?></h1>
 	<dl class="agency">
-		<dt>Agency</dt><dd>Wilhelmina</dd>
+		<dt>Agency</dt><dd><a href="https://www.wilhelmina.com/new-york">Wilhelmina</a></dd>
 		<dt>Agent</dt><dd><a href="mailto:Mike.Schepers@wilhelmina.com">Mike.Schepers@wilhelmina.com</a></dd>
 	</dl>
 	<div class="gallery">
