@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'AM_VERSION', '1.1.1' );
+define( 'AM_VERSION', '1.2.0' );
 
 /**
  * The site's sections. key => [ page title, page slug, default intro ].
@@ -135,6 +135,8 @@ add_action(
 			wp_enqueue_script( 'am-world', $uri . 'world.js', array(), $ver, true );
 			wp_enqueue_script( 'am-forms', $uri . 'forms.js', array(), $ver, true );
 			wp_enqueue_script( 'am-hero', $uri . 'hero.js', array( 'am-graph', 'am-world', 'am-forms' ), $ver, true );
+		} elseif ( 'music' === $key ) {
+			wp_enqueue_script( 'am-music', $uri . 'music.js', array(), $ver, true );
 		} elseif ( 'door' === $key ) {
 			wp_dequeue_script( 'am-site' );
 			wp_enqueue_script( 'am-supabase', 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.50.0/dist/umd/supabase.js', array(), null, true );
