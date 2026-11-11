@@ -5,6 +5,10 @@
   // id: Apple track number (cover and 30-second preview). sp: Spotify track id (exact link and cover).
   // The page sorts everything by artist.
   const SONGS = [
+    { title: "Lover, You Should've Come Over", artist: "Jeff Buckley", id: 1046187589 },
+    { title: "I Know It's Over", artist: "The Smiths", id: 800117452 },
+    { title: "Roi", artist: "Videoclub", id: 1543895860 },
+    { title: "Mai", artist: "Videoclub", id: 1543895858 },
     { title: "Clair de lune, L. 32", artist: "Claude Debussy", id: 303883400 },
     { title: "Forever Young", artist: "Alphaville", id: 73255043 },
     { title: "Young Forever", artist: "JAY-Z", id: 1440932276 },
@@ -41,7 +45,6 @@
     { title: "Through the Wire", artist: "Kanye West", id: 1437467903, sp: "4mmkhcEm1Ljy1U9nwtsxUo" },
     { title: "Int'l Players Anthem (I Choose You)", artist: "UGK feat. Outkast", sp: "4ns1XFP3W5JPyzvnAjMdHD" },
     { title: "My Favorite Things", artist: "John Coltrane", id: 962193194, sp: "3ZikLQCnH3SIswlGENBcKe" },
-    { title: "Mr. Right Now", artist: "21 Savage & Metro Boomin feat. Drake", id: 1534264268, sp: "4Q34FP1AT7GEl9oLgNtiWj" },
     { title: "Here Comes the Sun", artist: "The Beatles", id: 1441164589, sp: "45yEy5WJywhJ3sDI28ajTm" },
     { title: "Changes", artist: "2Pac", id: 1440662037, sp: "1ofhfV90EnYhEr7Un2fWiv" },
     { title: "La fille aux cheveux de lin, L. 33", artist: "Claude Debussy", id: 1055753498, sp: "0fpqOyC5DLDe5gAYKBB6X7" },
