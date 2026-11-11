@@ -64,13 +64,14 @@
   function setState(card, playing) { cards.forEach(c => c.classList.toggle("playing", c === card && playing)); }
   function play(card) {
     const s = SONGS[+card.dataset.i]; if (!s.preview) return;
-    if (current !== card) { audio.src = s.preview; current = card; }
+    clearInterval(fadeTimer);
+    if (current !== card) { if (current) setState(current, false); audio.src = s.preview; current = card; }
     audio.volume = 0;
     audio.play().then(() => { setState(card, true); fade(0.9); }).catch(() => card.classList.add("tap"));
   }
   function stop(card) {
     if (current !== card) return;
-    fade(0, () => { audio.pause(); setState(card, false); });
+    fade(0, () => { if (current === card) { audio.pause(); setState(card, false); } });
   }
 
   audio.addEventListener("timeupdate", () => {
