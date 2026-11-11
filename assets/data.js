@@ -14,6 +14,8 @@ window.SITE = {
     { id: "consciousness", label: "Consciousness", href: "subjects#consciousness", x:  0.28, y: -0.34 },
     { id: "philosophy",    label: "Philosophy",    href: "subjects#philosophy",    x:  0.32, y:  0.14 },
     { id: "politics",      label: "Politics",      href: "subjects#politics",      x: -0.32, y:  0.16 },
+    { id: "policy",        label: "Government & IR", href: "subjects#government-ir-policy", x: -0.86, y: -0.12 },
+    { id: "tech",          label: "Technology & AI", href: "subjects#technology-ai",        x:  0.12, y:  0.48 },
     // life
     { id: "writing",   label: "Writing",      href: "writing",        x: -0.78, y:  0.30 },
     { id: "books",     label: "Books",        href: "books",          x:  0.02, y:  0.02 },
@@ -26,6 +28,11 @@ window.SITE = {
   ],
 
   edges: [
+    { a: "policy",    b: "politics" },
+    { a: "policy",    b: "writing" },
+    { a: "tech",      b: "neuroscience" },
+    { a: "tech",      b: "consciousness" },
+    { a: "tech",      b: "music" },
     { a: "neuroscience",  b: "modeling" },
     { a: "neuroscience",  b: "consciousness" },
     { a: "consciousness", b: "philosophy" },

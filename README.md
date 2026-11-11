@@ -29,7 +29,8 @@ Plain HTML, CSS and JavaScript. No build step. Every push to `main` goes live wi
 - **The map and connections**: `assets/data.js`. `nodes` are the parts of life on the map; `edges` are the connections and the sentence for each, shown on the Connections page.
 - **Home globe**: `assets/world.js` holds the world map data (Natural Earth, public domain).
 - **Home forms**: `assets/forms.js` draws the shapes the particles pass through before scrolling (birds, jets, waves, sound, tree, lungs, neuron, eye, galaxy, nautilus, forest, cathedral). `ORDER` sets the sequence.
-- **Books**: `books/index.html`.
+- **Books**: `books/index.html`. Covers load from Open Library (covers.openlibrary.org); a book without a cover shows as a dark title card.
+- **Music**: the song list is at the top of `assets/music.js`. Each song has a title, an artist and an Apple track number (`id`); covers and 30-second previews load from Apple's catalog by that number. Songs without an `id` show as a title card with links only.
 - **Styles**: `assets/style.css`.
 
 ## The door (`/door/`)
